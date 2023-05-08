@@ -21,3 +21,9 @@ feel free to network with me on LinkedIn
 8/5/2023 - First commit
 
 Set up the project. Set up a game window and a simple block sprite which moves around the screen with WASD event listeners. Currently more than about 2 key presses per second crashes the browser, so obviously doing something very wrong thus far.
+
+8/5/23 - improved key control
+
+Made some changes to the algorithm that controls the sprite, working better and far more stable. I placed my event listeners inside of a use effect block to avoid data leaks, realised the instability was being caused by the event listeners reinitialising every time the DOM updated, ie all the time the sprite was in motion, so fixed by passing an empty array as second argument to use effect so it only ran once. Next thing is to implement Redux before getting in any deeper.
+
+Also need to add in explicit behaviours for multiple keys pressed at once.
