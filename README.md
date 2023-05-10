@@ -27,3 +27,7 @@ Set up the project. Set up a game window and a simple block sprite which moves a
 Made some changes to the algorithm that controls the sprite, working better and far more stable. I placed my event listeners inside of a use effect block to avoid data leaks, realised the instability was being caused by the event listeners reinitialising every time the DOM updated, ie all the time the sprite was in motion, so fixed by passing an empty array as second argument to use effect so it only ran once. Next thing is to implement Redux before getting in any deeper.
 
 Also need to add in explicit behaviours for multiple keys pressed at once.
+
+10/5/23 - added jump function and redux boilerplate
+
+Added in boilerplate for redux, but still need to convert my existing props to redux. Added jump function using SUVAT equations and playing with the constants - will update the fucntion to make it easier to tweak going forward. Set explicit variables for jumpForce and gravity.
