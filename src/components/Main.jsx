@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+
 import Tommy from "./Tommy";
 
 const Main = () => {
@@ -11,10 +12,12 @@ const Main = () => {
   const [wHeld, setWHeld] = useState(false);
   const [sHeld, setSHeld] = useState(false);
 
+  //Event states
+
   const downHandler = (key) => {
     key === "a" && setAHeld(true);
     key === "d" && setDHeld(true);
-    key === "w" && setWHeld(true);
+    key === "w" && tommyJump();
     key === "s" && setSHeld(true);
   };
 
@@ -25,6 +28,27 @@ const Main = () => {
     key === "s" && setSHeld(false);
   };
 
+  const tommyJump = () => {
+    // s = ut + 1/2 at**2
+    //initialise s and u and t, a is 10 constant
+    let initPosition = top;
+    console.log("jump ran");
+    let dist = 0;
+    let velInit = 30;
+    let time = 0;
+
+    const jump = setInterval(() => {
+      dist = velInit * time - time ** 2;
+      setTop(top - dist);
+      time += 1;
+      console.log(time, dist);
+      if (dist < 0 && time > 1) {
+        clearInterval(jump);
+        setTop(initPosition);
+      }
+    }, 10); //redraw every 10 ms
+  };
+
   //read keys
   useEffect(() => {
     document.addEventListener("keydown", (e) => downHandler(e.key));
@@ -33,18 +57,18 @@ const Main = () => {
   }, []);
 
   if (aHeld === true) {
-    setTimeout(() => setLeft(left - 5), 10);
+    setTimeout(() => setLeft(left - 10), 20);
   }
   if (dHeld === true) {
-    setTimeout(() => setLeft(left + 5), 10);
+    setTimeout(() => setLeft(left + 10), 20);
   }
   if (wHeld === true) {
-    setTimeout(() => setTop(top - 5), 10);
+    tommyJump();
   }
   if (sHeld === true) {
-    setTimeout(() => setTop(top + 5), 10);
+    setTimeout(() => setTop(top + 10), 20);
   }
-  // let key = e.key;
+  // let key = e.key;d
 
   // switch (key) {
   //   case "a":
