@@ -31,3 +31,7 @@ Also need to add in explicit behaviours for multiple keys pressed at once.
 10/5/23 - added jump function and redux boilerplate
 
 Added in boilerplate for redux, but still need to convert my existing props to redux. Added jump function using SUVAT equations and playing with the constants - will update the fucntion to make it easier to tweak going forward. Set explicit variables for jumpForce and gravity.
+
+12/5/23 - more redux boilerplate
+
+Adding the last of the Redux boilerplate to my React platform game project. All working apart from I can't get combineReducers to work, I think I'm having an issue with the keys.
