@@ -4,24 +4,18 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
-import { createStore } from "redux"; //ignore deprecated - wants us to use redux toolkit
+import { combineReducers, createStore } from "redux"; //ignore deprecated - wants us to use redux toolkit
+import { count } from "./redux/count";
+import { tommyLeft } from "./redux/tommyLeft";
+//combines reducers, to enable use of multiple reducers
+const rootReducer = combineReducers({ count });
 
-const initialState = { count: 0 }; //redux requires this
-
-//also redux boilerplate
-function reducer(state = initialState, action) {
-  switch (action.type) {
-    case "INCREMENT":
-      return { ...state, count: state.count + 1 };
-    case "DECREMENT":
-      return { ...state, count: state.count - 1 };
-    default:
-      return state;
-  }
-}
-//also redux boilerplate
-const store = createStore(reducer);
-
+//redux boilerplate
+const store = createStore(
+  rootReducer,
+  window._REDUX_DEVTOOLS_EXTENSION__ && window._REDUX_DEVTOOLS_EXTENSION__()
+);
+//redux devtools extension adds redux devtoools to the browser
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   //<Provider> </Provider> is part of redux

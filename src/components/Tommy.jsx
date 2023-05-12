@@ -1,6 +1,9 @@
 import React from "react";
+import { useSelector } from "react-redux";
+
 const Tommy = (props) => {
-  return <div id="tommy" style={{ top: props.top, left: props.left }}></div>;
+  const tommyLeft = useSelector((state) => state.tommyLeft);
+  return <div id="tommy" style={{ top: props.top, left: tommyLeft }}></div>;
 };
 
 export default Tommy;

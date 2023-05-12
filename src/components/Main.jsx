@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import Tommy from "./Tommy";
 
 const Main = () => {
+  // const count = useSelector((state) => state.count);
+  const dispatch = useDispatch();
   const [top, setTop] = useState(500);
   const [left, setLeft] = useState(500);
 
@@ -57,7 +60,7 @@ const Main = () => {
   }, []);
 
   if (aHeld === true) {
-    setTimeout(() => setLeft(left - 10), 20);
+    setTimeout(() => dispatch({ type: "TOMMY_LEFT" }), 20);
   }
   if (dHeld === true) {
     setTimeout(() => setLeft(left + 10), 20);
