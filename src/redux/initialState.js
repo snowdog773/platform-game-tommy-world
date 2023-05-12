@@ -1,1 +1,7 @@
-export const initialState = { count: 0, tommyLeft: 500 };
+export const initialState = {
+  tommyLeft: 500,
+  aHeld: false,
+  dHeld: false,
+  sHeld: false,
+  wHeld: false,
+};

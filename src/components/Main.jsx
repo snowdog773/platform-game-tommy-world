@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import Tommy from "./Tommy";
+import Keys from "./Keys";
 
 const Main = () => {
   // const count = useSelector((state) => state.count);
@@ -18,17 +19,17 @@ const Main = () => {
   //Event states
 
   const downHandler = (key) => {
-    key === "a" && setAHeld(true);
-    key === "d" && setDHeld(true);
-    key === "w" && tommyJump();
-    key === "s" && setSHeld(true);
+    key === "a" && dispatch({ type: "A_DOWN" });
+    key === "d" && dispatch({ type: "D_DOWN" });
+    key === "w" && dispatch({ type: "W_DOWN" });
+    key === "s" && dispatch({ type: "S_DOWN" });
   };
 
   const upHandler = (key) => {
-    key === "a" && setAHeld(false);
-    key === "d" && setDHeld(false);
-    key === "w" && setWHeld(false);
-    key === "s" && setSHeld(false);
+    key === "a" && dispatch({ type: "A_UP" });
+    key === "d" && dispatch({ type: "D_UP" });
+    key === "w" && dispatch({ type: "W_UP" });
+    key === "s" && dispatch({ type: "S_UP" });
   };
 
   const tommyJump = () => {
@@ -71,28 +72,11 @@ const Main = () => {
   if (sHeld === true) {
     setTimeout(() => setTop(top + 10), 20);
   }
-  // let key = e.key;d
-
-  // switch (key) {
-  //   case "a":
-  //     setLeft(left - 10);
-  //     break;
-  //   case "d":
-  //     setLeft(left + 10);
-  //     break;
-  //   case "w":
-  //     setTop(top - 10);
-  //     break;
-  //   case "s":
-  //     setTop(top + 10);
-  //     break;
-  //   default:
-  //     break;
-  // }
 
   return (
     <div id="gameWindow">
       <Tommy left={left} top={top} />
+      <Keys />
     </div>
   );
 };

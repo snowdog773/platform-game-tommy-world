@@ -35,3 +35,7 @@ Added in boilerplate for redux, but still need to convert my existing props to r
 12/5/23 - more redux boilerplate
 
 Adding the last of the Redux boilerplate to my React platform game project. All working apart from I can't get combineReducers to work, I think I'm having an issue with the keys.
+
+12/5/23 - redux working, WASD mapped
+
+Redux working properly now, figured out the issue with combineReducers and implemented. Created a reducer to handle WASD key presses and manage their state held/not held in the store.
