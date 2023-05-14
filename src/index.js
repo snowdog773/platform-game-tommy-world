@@ -6,15 +6,16 @@ import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux"; //redux
 import { combineReducers, createStore } from "redux"; //ignore deprecated - wants us to use redux toolkit
 
-import { tommyLeft } from "./redux/tommyLeft"; // reducer
 import { keyStates } from "./redux/keyStates";
+import { heroPosX, heroPosY } from "./redux/heroPosition";
 //combines reducers, to enable use of multiple reducers
 const rootReducer = combineReducers({
-  tommyLeft,
-  aHeld: keyStates,
-  dHeld: keyStates,
-  wHeld: keyStates,
-  sHeld: keyStates,
+  // aHeld: keyStates,
+  // dHeld: keyStates,
+  // wHeld: keyStates,
+  // sHeld: keyStates,
+  heroPosX,
+  heroPosY,
 });
 
 //redux boilerplate
@@ -24,6 +25,7 @@ const store = createStore(
 );
 //redux devtools extension adds redux devtoools to the browser
 const root = ReactDOM.createRoot(document.getElementById("root"));
+
 root.render(
   //<Provider> </Provider> is part of redux
   <React.StrictMode>
