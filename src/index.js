@@ -4,18 +4,17 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux"; //redux
-import { combineReducers, createStore } from "redux"; //ignore deprecated - wants us to use redux toolkit
+import { combineReducers, createStore } from "redux"; //deprecated warning because wants us to use redux toolkit
 
-import { keyStates } from "./redux/keyStates";
 import { heroPosX, heroPosY } from "./redux/heroPosition";
+import { staticRectangles } from "./redux/staticRectangles";
+import { landed } from "./redux/landed";
 //combines reducers, to enable use of multiple reducers
 const rootReducer = combineReducers({
-  // aHeld: keyStates,
-  // dHeld: keyStates,
-  // wHeld: keyStates,
-  // sHeld: keyStates,
   heroPosX,
   heroPosY,
+  staticRectangles,
+  landed,
 });
 
 //redux boilerplate
@@ -28,11 +27,11 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   //<Provider> </Provider> is part of redux
-  <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </React.StrictMode>
+  // <React.StrictMode>
+  <Provider store={store}>
+    <App />
+  </Provider>
+  // </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

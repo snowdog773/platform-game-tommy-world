@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import Hero from "./Hero";
-// import Keys from "./Keys";
-
+import StaticRectangle from "./StaticRectangle";
 const Main = () => {
   const dispatch = useDispatch();
+  ///////////////////////////////////////////////////////////////////////////////////////////
   //set key states
   const [aHeld, setAHeld] = useState(false);
   const [dHeld, setDHeld] = useState(false);
@@ -26,12 +26,59 @@ const Main = () => {
     key === "s" && setSHeld(false);
   };
 
+  useEffect(() => {
+    document.addEventListener("keydown", (e) => downHandler(e.key));
+    document.addEventListener("keyup", (e) => upHandler(e.key));
+  }, []);
+  //States from the Store
+  const isLanded = useSelector((state) => state.landed);
   const heroPosX = useSelector((state) => state.heroPosX);
+  const heroPosY = useSelector((state) => state.heroPosY);
+  const rectangles = useSelector((state) => state.staticRectangles); //top left width height
+  ////////////////////////////////////////////////////////////////////////////
+  //GRAVITY????????????????????????????????????????????????????????????????????????
+
+  useEffect(() => {
+    if (!isLanded) {
+      setTimeout(() => dispatch({ type: "MOVE_Y", payload: 10 }), 100);
+      rectangles.forEach((e) => {
+        if (heroPosX > e[1] && heroPosX < e[1] + e[2] && heroPosY >= e[0]) {
+          dispatch({ type: "LANDED" });
+          return;
+        }
+      });
+    }
+  }, [isLanded, heroPosY]);
+  const timerA = useRef(); //hook creates immutable object that survives as long as the component is live
+  const timerD = useRef();
   useEffect(() => {
     if (dHeld) {
-      dispatch({ type: "MOVE_X" });
+      timerD.current = setInterval(() => {
+        dispatch({ type: "MOVE_X", payload: 10 });
+      }, 20);
+    } else {
+      clearInterval(timerD.current);
     }
+
+    return () => {
+      clearInterval(timerD.current); //cleanup
+    };
   }, [dHeld]);
+
+  useEffect(() => {
+    if (aHeld) {
+      timerA.current = setInterval(() => {
+        dispatch({ type: "MOVE_X", payload: -10 });
+      }, 20);
+    } else {
+      clearInterval(timerA.current);
+    }
+    return () => {
+      clearInterval(timerA.current); //cleanup
+    };
+  });
+
+  /////////////////////////////////////////////////////////////////////////////////////////////
 
   //Event states
 
@@ -57,16 +104,16 @@ const Main = () => {
   // };
 
   //read keys
-  useEffect(() => {
-    document.addEventListener("keydown", (e) => downHandler(e.key));
-    document.addEventListener("keyup", (e) => upHandler(e.key));
-    // console.log(aHeld, dHeld, wHeld, sHeld);
-  }, []);
 
   return (
     <div id="gameWindow">
       <Hero />
-      {/* <Keys /> */}
+
+      {rectangles.map((e) => {
+        return (
+          <StaticRectangle top={e[0]} left={e[1]} width={e[2]} height={e[3]} />
+        );
+      })}
     </div>
   );
 };

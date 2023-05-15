@@ -11,3 +11,8 @@
   position: absolute;
   border-radius: 15px;
 }
+
+.static-rectangle {
+  position: absolute;
+  background-color: black;
+}

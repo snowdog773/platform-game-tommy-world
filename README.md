@@ -39,3 +39,11 @@ Adding the last of the Redux boilerplate to my React platform game project. All 
 12/5/23 - redux working, WASD mapped
 
 Redux working properly now, figured out the issue with combineReducers and implemented. Created a reducer to handle WASD key presses and manage their state held/not held in the store.
+
+15/5/23 - horizontal movement working, scenery array added, started on gravity
+
+Worked out the remaining bugs in the Redux code and is now working properly with no weird behaviour. Created reducers to handle horizontal and vertical position of the main character and bound left and right keyboard controls making use of useRef, useEffect hooks and setInterval. All working nicely with just the occasional wiggle if both keys are pressed at once with a gap of less than 20ms between presses. Created KNOWNBUGS file to go through at a later date.
+
+Also created an array of static rectangular scenery objects in initialState, so can easily add and remove objects by amending that array.
+
+Started work on gravity, added isLanded variable to state if character is in flight and a rudimentary collision detection. This still needs work as the character stops one frame below the intended stop point. Might this be better placed inside the Hero component?
